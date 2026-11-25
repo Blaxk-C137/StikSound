@@ -1,7 +1,7 @@
 // blaxkstik offline cache.
 // Pages: network first, so a new deploy shows up on the next open.
 // Hashed build assets: cache first, since their names change with every build.
-const CACHE = "blaxkstik-web-v1";
+const CACHE = "blaxkstik-web-v2";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icons/apple-touch-icon.png"];
 
 self.addEventListener("install", (event) => {

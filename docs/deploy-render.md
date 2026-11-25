@@ -45,6 +45,22 @@ Under **Headers**, add:
 
 Click **Create Static Site**. Subsequent deployments use the same build and publish settings.
 
+## Deploy as a Web Service
+
+A **Web Service** runs the included Node server. Use these settings for that service type:
+
+| Setting | Value |
+| --- | --- |
+| Runtime | Node |
+| Root directory | Leave blank |
+| Build command | `npm ci --include=dev && npm run build` |
+| Start command | `npm start` |
+| Environment variable | `NODE_VERSION=22` |
+
+The server serves `apps/web/dist`, supports app URL reloads, and listens on `0.0.0.0` with Render's automatic `PORT`. Media editing still runs on the user's device. Upload or push the updated root `package.json` and `tools` directory before redeploying.
+
+The Static Site Blueprint above uses the build command and publish directory; it does not need a start command.
+
 ## Verify the deployment
 
 1. Open the deployed URL and check that the page title and editor header say **blaxkstik**.

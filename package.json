@@ -15,6 +15,7 @@
   },
   "scripts": {
     "dev": "npm run dev --workspace=@blaxkstik/web --",
+    "start": "node tools/server.mjs",
     "prebuild": "npm run typecheck",
     "build": "npm run build --workspace=@blaxkstik/web --",
     "build:all": "npm run --workspaces --if-present build",

@@ -1,8 +1,21 @@
 /* Phone-specific layer on top of packages/ui/src/styles.css */
 
+html {
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body {
+  height: auto;
+  min-height: 100%;
+  overflow: visible;
+}
+
 html,
 body {
-  overscroll-behavior: none;
+  overscroll-behavior-x: none;
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
 }
@@ -10,13 +23,76 @@ body {
 /* 100vh on iOS Safari includes the area under the toolbars; dvh tracks the visible area.
    Safe-area insets keep buttons clear of the notch and the home indicator. */
 .stik-shell {
-  height: 100vh;
-  height: 100dvh;
+  height: auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: visible;
+  justify-content: flex-start;
   padding: calc(14px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right))
     calc(14px + env(safe-area-inset-bottom)) calc(14px + env(safe-area-inset-left));
 }
 
-@media (pointer: coarse) {
+.stik-top-corners {
+  position: sticky;
+  top: 0;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 30;
+  flex-shrink: 0;
+  background: var(--bg);
+  padding: 6px 0;
+}
+
+.stik-sticker-stage,
+.stik-preview-ready-card {
+  flex: 1 0 auto;
+  min-height: 220px;
+  padding: 12px;
+}
+
+.stik-transparency-bar,
+.stik-timeline-bar,
+.stik-toast {
+  flex-shrink: 0;
+}
+
+.stik-popover {
+  position: fixed;
+  top: 76px;
+  top: calc(76px + env(safe-area-inset-top, 0px));
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: calc(100vw - 28px);
+  max-width: 360px;
+  max-height: calc(100vh - 100px);
+  max-height: calc(100dvh - 100px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  z-index: 50;
+}
+
+.stik-popover-actions button {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.stik-modal-backdrop {
+  z-index: 60;
+  overflow-y: auto;
+  padding: calc(16px + env(safe-area-inset-top, 0px)) calc(16px + env(safe-area-inset-right, 0px))
+    calc(16px + env(safe-area-inset-bottom, 0px)) calc(16px + env(safe-area-inset-left, 0px));
+}
+
+.stik-modal {
+  width: 100%;
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+@media (max-width: 600px), (pointer: coarse) {
   /* Apple's minimum comfortable touch target is 44 pt */
   .stik-corner-btn {
     width: 44px;
@@ -38,6 +114,14 @@ body {
     height: 34px;
   }
 
+  .stik-color-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
   .stik-pill-btn {
     padding: 11px 14px;
     font-size: 14px;
@@ -49,8 +133,45 @@ body {
   }
 
   .stik-preview-box {
-    width: min(74vw, 320px);
-    height: min(74vw, 320px);
+    width: min(72vw, 36vh, 280px);
+    height: min(72vw, 36vh, 280px);
+    width: min(72vw, 36dvh, 280px);
+    height: min(72vw, 36dvh, 280px);
+    max-width: 100%;
+  }
+
+  .stik-ready-video {
+    width: min(72vw, 36vh, 240px);
+    height: min(72vw, 36vh, 240px);
+    width: min(72vw, 36dvh, 240px);
+    height: min(72vw, 36dvh, 240px);
+    max-width: 100%;
+  }
+
+  .stik-audio-empty-form {
+    flex-wrap: wrap;
+  }
+
+  .stik-pill-wide,
+  .stik-url-input,
+  .stik-waveform-track {
+    min-width: 0;
+  }
+
+  .stik-duration-pill,
+  .stik-duration-switch-btn {
+    font-size: 13px;
+  }
+
+  .stik-duration-switch-btn {
+    min-width: 44px;
+    min-height: 38px;
+  }
+
+  .stik-trim-slider {
+    min-width: 0;
+    min-height: 32px;
+    margin: 0;
   }
 
   .stik-empty-title {
@@ -66,14 +187,38 @@ body {
     padding: 3px 9px;
   }
 
-  .stik-popover button {
+  .stik-popover {
+    top: auto;
+    bottom: 14px;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    left: 14px;
+    left: calc(14px + env(safe-area-inset-left, 0px));
+    right: 14px;
+    right: calc(14px + env(safe-area-inset-right, 0px));
+    width: auto;
+    max-width: 480px;
+    margin: 0 auto;
+    transform: none;
+  }
+
+  .stik-popover button,
+  .stik-modal button {
     min-height: 44px;
+    font-size: 14px;
   }
 
   /* iOS zooms into any focused field smaller than 16px */
   input,
   select,
-  textarea {
+  textarea,
+  .stik-url-input {
     font-size: 16px;
+  }
+}
+
+@media (max-height: 500px) {
+  .stik-sticker-stage,
+  .stik-preview-ready-card {
+    min-height: 180px;
   }
 }

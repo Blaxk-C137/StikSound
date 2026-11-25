@@ -70,6 +70,18 @@ You can also create **New → Static Site** manually with these settings:
 
 The Blueprint also sets cache headers for app updates and compiled assets. Full instructions, including the matching manual headers, are in [docs/deploy-render.md](docs/deploy-render.md).
 
+### Render Web Service
+
+For a Render **Web Service**, choose the **Node** runtime and use these settings:
+
+| Setting | Value |
+| --- | --- |
+| Root directory | Leave blank |
+| Build command | `npm ci --include=dev && npm run build` |
+| Start command | `npm start` |
+
+`npm start` serves `apps/web/dist` using Render's `PORT` on `0.0.0.0`. Render supplies the port automatically. To try the production server locally, run `npm run build` followed by `npm start`, then open **http://localhost:3000**.
+
 ## Install on a phone
 
 Open the deployed HTTPS site:
@@ -88,6 +100,7 @@ packages/ui/        Shared editor, timeline, and translations
 packages/media-web/ Browser media decoding, encoding, and ZIP handling
 packages/providers/ MyInstants URL policy and extraction
 render.yaml         Render Static Site deployment
+tools/server.mjs    Production server for Render Web Services
 ```
 
 The original desktop/extension sources and Rust crates remain available in `apps/desktop`, `apps/extension`, and `crates`. Normal development and deployment commands target the web app. `npm run build:all` and `npm run typecheck:all` cover all original workspaces.
