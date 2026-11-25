@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "StikSound",
+  "version": "1.1.1",
+  "identifier": "app.stiksound.desktop",
+  "build": {
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "StikSound",
+        "width": 440,
+        "height": 540,
+        "center": true,
+        "resizable": true,
+        "minWidth": 360,
+        "minHeight": 460
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self' blob: data:; img-src 'self' blob: data:; media-src 'self' blob: data:; connect-src https://www.myinstants.com https://myinstants.com"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}

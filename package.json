@@ -1,0 +1,45 @@
+{
+  "name": "blaxkstik",
+  "private": true,
+  "version": "1.1.1",
+  "license": "MIT OR Apache-2.0",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "description": "blaxkstik — Create sticker videos with sound in your browser",
+  "packageManager": "npm@10.9.2",
+  "engines": {
+    "node": ">=22",
+    "npm": ">=10"
+  },
+  "scripts": {
+    "dev": "npm run dev --workspace=@blaxkstik/web --",
+    "prebuild": "npm run typecheck",
+    "build": "npm run build --workspace=@blaxkstik/web --",
+    "build:all": "npm run --workspaces --if-present build",
+    "preview": "npm run preview --workspace=@blaxkstik/web --",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "npm run typecheck --workspace=@blaxkstik/web",
+    "typecheck:all": "npm run --workspaces --if-present typecheck",
+    "lint": "npm run typecheck"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@types/chrome": "^0.0.287",
+    "@types/node": "^22.10.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "jsdom": "^25.0.1",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3",
+    "vitest": "^2.1.8"
+  },
+  "overrides": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  }
+}
